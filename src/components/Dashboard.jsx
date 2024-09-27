@@ -46,6 +46,13 @@ export default function Dashboard() {
 		},
 	];
 
+	const tableHeaders = [
+		{ name: "Name", key: "name" },
+		{ name: "Price", key: "price" },
+		{ name: "Quantity", key: "quantity" },
+		{ name: "Amount", key: "amount" },
+	];
+
 	const data = [
 		{ name: "Jan", Actual: 18, Projection: 22 },
 		{ name: "Feb", Actual: 20, Projection: 25 },
@@ -63,21 +70,58 @@ export default function Dashboard() {
 	const tableData = [
 		{
 			name: "ASOS Ridley High Waist",
-			price: 79.49,
+			price: "$79.49",
 			quantity: 82,
-			amount: 6518.18,
+			amount: "$6518.18",
 		},
 		{
 			name: "Marco Lightweight Shirt",
-			price: 128.5,
+			price: "$128.50",
 			quantity: 37,
-			amount: 4754.5,
+			amount: "$4754.50",
 		},
-		{ name: "Half Sleeve Shirt", price: 39.99, quantity: 64, amount: 2559.36 },
-		{ name: "Lightweight Jacket", price: 20.0, quantity: 184, amount: 3680.0 },
-		{ name: "Lightweight Jacket", price: 20.0, quantity: 184, amount: 3680.0 },
-		{ name: "Lightweight Jacket", price: 20.0, quantity: 184, amount: 3680.0 },
-		{ name: "Lightweight Jacket", price: 20.0, quantity: 184, amount: 3680.0 },
+		{
+			name: "Half Sleeve Shirt",
+			price: "$39.99",
+			quantity: 64,
+			amount: "$2559.36",
+		},
+		{
+			name: "Lightweight Jacket",
+			price: "$20.00",
+			quantity: 184,
+			amount: "$3680.00",
+		},
+		{
+			name: "Long Sleeve Shirt",
+			price: "$25.50",
+			quantity: 10,
+			amount: "$255.00",
+		},
+		{
+			name: "Cotton T-Shirt",
+			price: "$10.99",
+			quantity: 184,
+			amount: "$2023.16",
+		},
+		{
+			name: "Lightweight Jacket",
+			price: "$20.00",
+			quantity: 184,
+			amount: "$3680.00",
+		},
+		{
+			name: "Long Sleeve Shirt",
+			price: "$25.50",
+			quantity: 10,
+			amount: "$255.00",
+		},
+		{
+			name: "Cotton T-Shirt",
+			price: "$10.99",
+			quantity: 184,
+			amount: "$2023.16",
+		},
 	];
 
 	const PieChartdata = [
@@ -225,8 +269,7 @@ export default function Dashboard() {
 							isDarkMode
 								? "bg-zinc-800 text-white fade-in"
 								: "bg-zinc-100 text-zinc-900 fade-out"
-						}`}
-						style={{ height: "380px" }}
+						}} style={{ height: "380px" }`}
 					>
 						<div className="flex items-center space-x-4 mb-4">
 							<h3
@@ -365,21 +408,21 @@ export default function Dashboard() {
 						<table className="min-w-full table-auto text-left border-collapse">
 							<thead>
 								<tr className="text-sm border-b-2 border-[#a9aaac]">
-									<th className="px-4 py-2">Name</th>
-									<th className="px-4 py-2">Price</th>
-									<th className="px-4 py-2">Quantity</th>
-									<th className="px-4 py-2">Amount</th>
+									{tableHeaders.map((header, index) => (
+										<th key={index} className="px-4 py-2">
+											{header.name}
+										</th>
+									))}
 								</tr>
 							</thead>
 							<tbody>
 								{tableData.map((item, index) => (
 									<tr key={index}>
-										<td className="px-4 py-2">{item.name}</td>
-										<td className="px-4 py-2">${item.price.toFixed(2)}</td>
-										<td className="px-4 py-2">{item.quantity}</td>
-										<td className="px-4 py-2">
-											${item.amount.toLocaleString()}
-										</td>
+										{tableHeaders.map((header, index) => (
+											<td key={index} className="px-4 py-2">
+												{item[header.key]}
+											</td>
+										))}
 									</tr>
 								))}
 							</tbody>
@@ -403,13 +446,12 @@ export default function Dashboard() {
 									innerRadius={60}
 									outerRadius={80}
 									fill="#8884d8"
-									paddingAngle={5}
+									paddingAngle={3}
 									dataKey="value"
 								>
 									{PieChartdata.map((entry, index) => (
 										<Cell
-											key={`cell-${index}`}
-											fill={COLORS[index % COLORS.length]}
+											key={`cell-${index}} fill={COLORS[index % COLORS.length]`}
 										/>
 									))}
 								</Pie>

@@ -80,7 +80,6 @@ const Table = () => {
 				return "";
 		}
 	};
-
 	const icons = [
 		{ icon: <FaPlus />, key: "Plus" },
 		{ icon: <CgSortAz />, key: "SortAz" },
@@ -100,6 +99,7 @@ const Table = () => {
 			}`}
 		>
 			<h2 className="text-xl font-bold mb-4">Order List</h2>
+
 			<div
 				className={`flex items-center justify-between mb-4 rounded-md p-2 ${
 					isDarkMode
@@ -111,7 +111,9 @@ const Table = () => {
 					{icons.map((item, index) => (
 						<div
 							key={index}
-							className="p-2 rounded-md cursor-pointer hover:bg-zinc-200"
+							className={`p-2 rounded-md cursor-pointer ${
+								isDarkMode ? "hover:bg-zinc-800" : "hover:bg-zinc-100"
+							}`}
 						>
 							{item.icon}
 						</div>
@@ -207,8 +209,10 @@ const Table = () => {
 					previousClassName={"p-2 font-bold rounded"}
 					nextClassName={"p-2 font-bold rounded"}
 					breakClassName={"p-2"}
-					activeClassName={`bg-zinc-200 text-zinc-900 ${
-						isDarkMode ? "bg-zinc-700" : "bg-zinc-200"
+					activeClassName={`${
+						isDarkMode
+							? "bg-zinc-900 text-zinc-100 hover:bg-zinc-800"
+							: "bg-white text-zinc-900 hover:bg-zinc-300"
 					}`}
 				/>
 			</div>

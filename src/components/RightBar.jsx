@@ -2,20 +2,92 @@ import { motion } from "framer-motion";
 import { PiBugBeetle, PiUser, PiBroadcast } from "react-icons/pi";
 import { useAuth } from "./Context";
 
-const notifications = [
-	{ type: "bug", message: "You have a bug that needs ...", time: "Just now" },
-	{ type: "user", message: "New user registered", time: "59 minutes ago" },
-	{
-		type: "bug",
-		message: "You have a bug that needs ...",
-		time: "12 hours ago",
-	},
-	{
-		type: "subscribe",
-		message: "Andi Lane subscribed to you",
-		time: "Today, 11:59 AM",
-	},
-];
+const IconWrapper = ({ children, bgColor }) => (
+	<div className={`p-1 rounded-full mr-2 ${bgColor}`}>{children}</div>
+);
+
+const NotificationItem = ({ notif, isDarkMode }) => {
+	const icons = {
+		bug: (
+			<PiBugBeetle
+				className={`${
+					isDarkMode ? "text-red-400" : "text-red-600"
+				}} style={{ fontSize: '18px' }`}
+			/>
+		),
+		user: (
+			<PiUser
+				className={`${isDarkMode ? "text-blue-400" : "text-blue-600"}`}
+				style={{ fontSize: "18px" }}
+			/>
+		),
+		subscribe: (
+			<PiBroadcast
+				className={`${isDarkMode ? "text-green-400" : "text-green-600"}`}
+				style={{ fontSize: "18px" }}
+			/>
+		),
+	};
+
+	const bgColors = {
+		bug: isDarkMode ? "bg-red-600/20" : "bg-red-200/50",
+		user: isDarkMode ? "bg-blue-600/20" : "bg-blue-200/50",
+		subscribe: isDarkMode ? "bg-green-600/20" : "bg-green-200/50",
+	};
+
+	return (
+		<li className="flex items-center mb-4">
+			<IconWrapper bgColor={bgColors[notif.type]}>
+				{icons[notif.type]}
+			</IconWrapper>
+			<div>
+				<p className="text-xs">{notif.message}</p>
+				<p
+					className={`text-xs ${
+						isDarkMode ? "text-zinc-400" : "text-zinc-500"
+					}`}
+				>
+					{notif.time}
+				</p>
+			</div>
+		</li>
+	);
+};
+
+const ActivityItem = ({ activity, isDarkMode }) => (
+	<li className="flex items-center mb-4">
+		<IconWrapper bgColor={isDarkMode ? "bg-blue-600/20" : "bg-blue-200/50"}>
+			<img
+				src={activity.avatar}
+				alt="avatar"
+				className="w-6 h-6 rounded-full"
+			/>
+		</IconWrapper>
+		<div>
+			<p className="text-xs">{activity.action}</p>
+			<p
+				className={`text-xs ${isDarkMode ? "text-zinc-400" : "text-zinc-500"}`}
+			>
+				{activity.time}
+			</p>
+		</div>
+	</li>
+);
+
+const ContactItem = ({ contact, index, isDarkMode }) => (
+	<li className="flex items-center mb-3">
+		<IconWrapper bgColor={isDarkMode ? "bg-purple-600/20" : "bg-purple-200/50"}>
+			<img
+				src={`https://i.pravatar.cc/30?img=${index + 20}`}
+				alt="avatar"
+				className="w-6 h-6 rounded-full"
+			/>
+		</IconWrapper>
+		<div>
+			<p className="text-sm">{contact.user}</p>
+		</div>
+	</li>
+);
 
 export default function Sidebar() {
 	const { isRightClose, isDarkMode } = useAuth();
@@ -31,6 +103,21 @@ export default function Sidebar() {
 			transition: { duration: 0.3, ease: "easeOut" },
 		},
 	};
+
+	const notifications = [
+		{ type: "bug", message: "You have a bug that needs ...", time: "Just now" },
+		{ type: "user", message: "New user registered", time: "59 minutes ago" },
+		{
+			type: "bug",
+			message: "You have a bug that needs ...",
+			time: "12 hours ago",
+		},
+		{
+			type: "subscribe",
+			message: "Andi Lane subscribed to you",
+			time: "Today, 11:59 AM",
+		},
+	];
 
 	const contactsData = [
 		{ user: "Natali Craig" },
@@ -74,167 +161,53 @@ export default function Sidebar() {
 			variants={sidebarVariants}
 			initial="closed"
 			animate={isRightClose ? "closed" : "open"}
-			className={`max-h-screen font-sans overflow-scroll
-                ${
-									isDarkMode
-										? "bg-zinc-900 text-zinc-300 fade-in"
-										: "bg-white text-zinc-700 fade-out"
-								}`}
+			className={`max-h-screen font-sans overflow-scroll ${
+				isDarkMode ? "bg-zinc-900 text-zinc-300" : "bg-white text-zinc-700"
+			}`}
 		>
 			<div className="p-4">
-				<div>
-					<h2
-						className={`font-bold text-md mb-2 ${
-							isDarkMode ? "text-zinc-100 fade-in" : "text-zinc-900 fade-out"
-						}`}
-					>
-						Notifications
-					</h2>
-					<ul>
-						{notifications.map((notif, index) => (
-							<li key={index} className="flex items-center justify-start mb-4">
-								{notif.type === "bug" && (
-									<div
-										className={`p-1 rounded-full ${
-											isDarkMode
-												? "bg-red-600/20 fade-in"
-												: "bg-red-200/50 fade-out"
-										} mr-2`}
-									>
-										<PiBugBeetle
-											className={`${
-												isDarkMode
-													? "text-red-400 fade-in"
-													: "text-red-600 fade-out"
-											}`}
-											style={{ fontSize: "18px" }}
-										/>
-									</div>
-								)}
-								{notif.type === "user" && (
-									<div
-										className={`p-1 rounded-full ${
-											isDarkMode
-												? "bg-blue-600/20 fade-in"
-												: "bg-blue-200/50 fade-out"
-										} mr-2`}
-									>
-										<PiUser
-											className={`${
-												isDarkMode
-													? "text-blue-400 fade-in"
-													: "text-blue-600 fade-out"
-											}`}
-											style={{ fontSize: "18px" }}
-										/>
-									</div>
-								)}
-								{notif.type === "subscribe" && (
-									<div
-										className={`p-1 rounded-full ${
-											isDarkMode
-												? "bg-green-600/20 fade-in"
-												: "bg-green-200/50 fade-out"
-										} mr-2`}
-									>
-										<PiBroadcast
-											className={`${
-												isDarkMode
-													? "text-green-400 fade-in"
-													: "text-green-600 fade-out"
-											}`}
-											style={{ fontSize: "18px" }}
-										/>
-									</div>
-								)}
-								<div className="">
-									<p className="text-xs">{notif.message}</p>
-									<p
-										className={`text-xs ${
-											isDarkMode
-												? "text-zinc-400 fade-in"
-												: "text-zinc-500 fade-out"
-										}`}
-									>
-										{notif.time}
-									</p>
-								</div>
-							</li>
-						))}
-					</ul>
-				</div>
-				<div>
-					<h2
-						className={`font-bold text-md mb-2 ${
-							isDarkMode ? "text-zinc-100 fade-in" : "text-zinc-900 fade-out"
-						}`}
-					>
-						Activities
-					</h2>
-					<ul>
-						{activityData.map((activity, index) => (
-							<li key={index} className="flex items-center justify-start mb-4">
-								<div
-									className={`rounded-full ${
-										isDarkMode
-											? "bg-blue-600/20 fade-in"
-											: "bg-blue-200/50 fade-out"
-									} mr-2`}
-								>
-									<img
-										src={activity.avatar}
-										alt="avatar"
-										className="w-6 h-6 rounded-full"
-									/>
-								</div>
-								<div className="">
-									<p className="text-xs">{activity.action}</p>
-									<p
-										className={`text-xs ${
-											isDarkMode
-												? "text-zinc-400 fade-in"
-												: "text-zinc-500 fade-out"
-										}`}
-									>
-										{activity.time}
-									</p>
-								</div>
-							</li>
-						))}
-					</ul>
-				</div>
-				<div>
-					<h2
-						className={`font-bold text-md mb-2 ${
-							isDarkMode ? "text-zinc-100 fade-in" : "text-zinc-900 fade-out"
-						}`}
-					>
-						Contacts
-					</h2>
-					<ul>
-						{contactsData.map((contact, index) => (
-							<li key={index} className="flex items-center justify-start mb-3">
-								<div
-									className={`rounded-full ${
-										isDarkMode
-											? "bg-purple-600/20 fade-in"
-											: "bg-purple-200/50 fade-out"
-									} mr-2`}
-								>
-									<img
-										src={`https://i.pravatar.cc/30?img=${index + 20}`}
-										alt="avatar"
-										className="w-6 h-6 rounded-full"
-									/>
-								</div>
-								<div className="">
-									<p className="text-sm">{contact.user}</p>
-								</div>
-							</li>
-						))}
-					</ul>
-				</div>
+				<Section title="Notifications" isDarkMode={isDarkMode}>
+					{notifications.map((notif, index) => (
+						<NotificationItem
+							key={index}
+							notif={notif}
+							isDarkMode={isDarkMode}
+						/>
+					))}
+				</Section>
+				<Section title="Activities" isDarkMode={isDarkMode}>
+					{activityData.map((activity, index) => (
+						<ActivityItem
+							key={index}
+							activity={activity}
+							isDarkMode={isDarkMode}
+						/>
+					))}
+				</Section>
+				<Section title="Contacts" isDarkMode={isDarkMode}>
+					{contactsData.map((contact, index) => (
+						<ContactItem
+							key={index}
+							contact={contact}
+							index={index}
+							isDarkMode={isDarkMode}
+						/>
+					))}
+				</Section>
 			</div>
 		</motion.div>
 	);
 }
+
+const Section = ({ title, children, isDarkMode }) => (
+	<div>
+		<h2
+			className={`font-bold text-md mb-2 ${
+				isDarkMode ? "text-zinc-100" : "text-zinc-900"
+			}`}
+		>
+			{title}
+		</h2>
+		<ul>{children}</ul>
+	</div>
+);
