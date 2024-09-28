@@ -269,7 +269,8 @@ export default function Dashboard() {
 							isDarkMode
 								? "bg-zinc-800 text-white fade-in"
 								: "bg-zinc-100 text-zinc-900 fade-out"
-						}} style={{ height: "380px" }`}
+						}`}
+						style={{ height: "380px" }}
 					>
 						<div className="flex items-center space-x-4 mb-4">
 							<h3
@@ -451,7 +452,8 @@ export default function Dashboard() {
 								>
 									{PieChartdata.map((entry, index) => (
 										<Cell
-											key={`cell-${index}} fill={COLORS[index % COLORS.length]`}
+											key={`cell-${index}`}
+											fill={COLORS[index % COLORS.length]}
 										/>
 									))}
 								</Pie>

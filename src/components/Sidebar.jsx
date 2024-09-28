@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-	FaChevronDown,
+	FaChevronUp,
 	FaChevronRight,
 	FaUserCircle,
 	FaRegIdBadge,
@@ -38,7 +38,6 @@ const menus = {
 	BlogMenu: ["Posts", "Categories", "Tags", "Comments", "Authors"],
 	SocialMenu: ["Feed", "Messages", "Friends", "Groups", "Notifications 1"],
 };
-
 ExpandableMenu.propTypes = {
 	label: PropTypes.string.isRequired,
 	Icon: PropTypes.elementType.isRequired,
@@ -47,7 +46,6 @@ ExpandableMenu.propTypes = {
 	setActiveTab: PropTypes.func.isRequired,
 	isDarkMode: PropTypes.bool,
 };
-
 function ExpandableMenu({
 	label,
 	Icon,
@@ -74,7 +72,7 @@ function ExpandableMenu({
 					}`}
 				>
 					{isOpen ? (
-						<FaChevronDown
+						<FaChevronUp
 							className={`text-${
 								isDarkMode ? "zinc-400 fade-in" : "fade-out zinc-500"
 							}`}
