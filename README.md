@@ -2,6 +2,10 @@
 
 This guide will help you install and run a React project using Vite, with additional packages including Tailwind CSS, Framer Motion, and ESLint configuration.
 
+### Hosted URL:
+
+- https://byewind-dashboard-tanmay.vercel.app/
+
 ## Prerequisites
 
 Make sure you have the following installed on your machine:
