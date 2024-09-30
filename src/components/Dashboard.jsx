@@ -122,6 +122,48 @@ export default function Dashboard() {
 			quantity: 184,
 			amount: "$2023.16",
 		},
+		{
+			name: "Lightweight Jacket",
+			price: "$20.00",
+			quantity: 184,
+			amount: "$3680.00",
+		},
+		{
+			name: "Long Sleeve Shirt",
+			price: "$25.50",
+			quantity: 10,
+			amount: "$255.00",
+		},
+		{
+			name: "Cotton T-Shirt",
+			price: "$10.99",
+			quantity: 184,
+			amount: "$2023.16",
+		},
+		{
+			name: "Lightweight Jacket",
+			price: "$20.00",
+			quantity: 184,
+			amount: "$3680.00",
+		},
+		{
+			name: "Long Sleeve Shirt",
+			price: "$25.50",
+			quantity: 10,
+			amount: "$255.00",
+		},
+		{
+			name: "Cotton T-Shirt",
+			price: "$10.99",
+			quantity: 184,
+			amount: "$2023.16",
+		},
+		{
+			name: "Lightweight Jacket",
+			price: "$20.00",
+			quantity: 184,
+			amount: "$3680.00",
+		},
 	];
 
 	const PieChartdata = [
