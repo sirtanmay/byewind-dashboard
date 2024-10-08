@@ -152,7 +152,9 @@ const Table = () => {
 						<div
 							key={index}
 							className={`p-2 rounded-md cursor-pointer ${
-								isDarkMode ? "hover:bg-zinc-800" : "hover:bg-zinc-100"
+								isDarkMode
+									? "hover:bg-zinc-800 hover:text-gray-400 duration-300"
+									: "hover:bg-zinc-100 hover:text-gray-400 duration-300"
 							}`}
 						>
 							{item.icon}
@@ -161,7 +163,7 @@ const Table = () => {
 				</div>
 				<div className="relative">
 					<FaSearch
-						className={`absolute top-3.5 left-2 ${
+						className={`absolute top-3.5 left-2 hover:text-gray-600 ${
 							isDarkMode ? "text-zinc-300 fade-in" : "text-zinc-400 fade-out"
 						}`}
 					/>
@@ -171,8 +173,8 @@ const Table = () => {
 						className={`pl-8 py-2 border rounded-lg w-15 
                             ${
 															isDarkMode
-																? "bg-zinc-800 text-white border-zinc-600 fade-in"
-																: "bg-[#f8f9fb] text-black border-zinc-300 fade-out"
+																? "bg-zinc-800 hover:bg-zinc-700 text-white border-zinc-600 fade-in"
+																: "bg-[#f8f9fb] hover:bg-zinc-200 text-black border-zinc-300 fade-out"
 														}`}
 					/>
 				</div>
@@ -245,14 +247,26 @@ const Table = () => {
 					pageRangeDisplayed={5}
 					onPageChange={handlePageClick}
 					containerClassName={"pagination flex items-center gap-2"}
-					pageClassName={"p-2 font-bold mx-2 rounded"}
-					previousClassName={"p-2 font-bold rounded"}
-					nextClassName={"p-2 font-bold rounded"}
+					pageClassName={`p-2 font-bold mx-2 rounded cursor-pointer ${
+						isDarkMode
+							? "hover:bg-zinc-800 text-zinc-100 duration-100"
+							: "hover:bg-zinc-200 text-zinc-900 duration-100"
+					}`}
+					previousClassName={`p-2 font-bold rounded cursor-pointer ${
+						isDarkMode
+							? "hover:text-yellow-600 text-zinc-100 duration-300"
+							: "hover:text-gray-400 text-zinc-900 duration-300"
+					}`}
+					nextClassName={`p-2 font-bold rounded cursor-pointer ${
+						isDarkMode
+							? "hover:text-yellow-600 text-zinc-100 duration-300"
+							: "hover:text-gray-400 text-zinc-900 duration-300"
+					}`}
 					breakClassName={"p-2"}
 					activeClassName={`${
 						isDarkMode
-							? "bg-zinc-900 text-zinc-100 hover:bg-zinc-800"
-							: "bg-white text-zinc-900 hover:bg-zinc-300"
+							? "bg-zinc-800 text-zinc-100"
+							: "bg-zinc-100 text-zinc-900"
 					}`}
 				/>
 			</div>

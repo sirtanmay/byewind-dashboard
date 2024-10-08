@@ -208,6 +208,8 @@ const Section = ({ title, children, isDarkMode }) => (
 		>
 			{title}
 		</h2>
-		<ul>{children}</ul>
+		<ul className="max-h-[270px] overflow-hidden overflow-y-auto mb-6">
+			{children}
+		</ul>
 	</div>
 );

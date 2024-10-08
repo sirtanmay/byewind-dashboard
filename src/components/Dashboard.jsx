@@ -202,7 +202,7 @@ export default function Dashboard() {
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 					transition={{ duration: 0.7 }}
-					className={`flex w-full ${
+					className={`flex flex-col md:flex-row w-full ${
 						isDarkMode
 							? "bg-zinc-900 text-white fade-in"
 							: "bg-white text-zinc-900 fade-out"
@@ -218,19 +218,19 @@ export default function Dashboard() {
 								let alternateColor;
 								if (index === 1 || index === 2) {
 									alternateColor = isDarkMode
-										? "bg-zinc-800 text-white fade-in"
-										: "bg-zinc-100 text-black fade-out";
+										? "bg-zinc-800 hover:bg-zinc-700 text-white fade-in"
+										: "bg-zinc-100 hover:bg-zinc-200 text-black fade-out";
 								} else {
 									alternateColor = isDarkMode
-										? "bg-blue-100 text-black fade-in"
-										: "bg-blue-100 text-black fade-out";
+										? "bg-blue-100 hover:bg-blue-200 text-black fade-in"
+										: "bg-blue-100 hover:bg-blue-200 text-black fade-out";
 								}
 
 								return (
 									<Link
 										to={data.link}
 										key={index}
-										className={`${alternateColor} pt-8 px-6 h-[48%] rounded-3xl w-full md:w-[47%]`}
+										className={`${alternateColor} pt-8 px-6 h-[48%] rounded-3xl w-full md:w-[47%] duration-1000 group`}
 									>
 										<div className="text-md font-bold">{data.name}</div>
 										<div className="mt-4 flex justify-between items-center">
@@ -240,13 +240,13 @@ export default function Dashboard() {
 													data.hike.startsWith("-")
 														? "text-red-500"
 														: "text-green-500"
-												}`}
+												} transform transition-transform`}
 											>
 												{data.hike}{" "}
 												{data.hike.startsWith("+") ? (
-													<FaArrowTrendUp className="ml-1" />
+													<FaArrowTrendUp className="ml-1 group-hover:translate-y-[-10px] duration-500" />
 												) : (
-													<HiOutlineArrowTrendingDown className="ml-1" />
+													<HiOutlineArrowTrendingDown className="ml-1 group-hover:translate-y-[10px] duration-500" />
 												)}
 											</span>
 										</div>
@@ -256,17 +256,17 @@ export default function Dashboard() {
 						</div>
 
 						<div
-							className={`w-full md:w-1/2 flex items-center rounded-3xl justify-center ${
+							className={`w-full md:w-1/2 flex items-center cursor-pointer rounded-3xl justify-center ${
 								isDarkMode
-									? "bg-zinc-800 text-white fade-in"
-									: "bg-zinc-100 text-zinc-900 fade-out"
+									? "bg-zinc-800 text-white fade-in hover:bg-zinc-700"
+									: "bg-zinc-100 text-zinc-900 fade-out hover:bg-zinc-200"
 							}`}
 						>
-							<div className="py-6 px-2 rounded-md w-full">
+							<div className="py-6 px-2 rounded-md w-full cursor-pointer">
 								<h3 className="ml-4 text-start font-bold">
 									Projections vs Actuals
 								</h3>
-								<div className="mt-4" style={{ height: 300 }}>
+								<div className="mt-4 cursor-pointer" style={{ height: 300 }}>
 									<ResponsiveContainer width="100%" height="90%">
 										<BarChart
 											width={500}
@@ -304,17 +304,17 @@ export default function Dashboard() {
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 					transition={{ duration: 0.7 }}
-					className="flex gap-6 h-[380px] w-full mt-6"
+					className="flex flex-col md:flex-row gap-6 h-[380px] w-full mt-6"
 				>
 					<div
 						className={`w-[70%] rounded-3xl pt-8 pb-12 px-8 ${
 							isDarkMode
-								? "bg-zinc-800 text-white fade-in"
-								: "bg-zinc-100 text-zinc-900 fade-out"
+								? "bg-zinc-800 hover:bg-zinc-700 text-white fade-in"
+								: "bg-zinc-100 hover:bg-zinc-200 text-zinc-900 fade-out"
 						}`}
 						style={{ height: "380px" }}
 					>
-						<div className="flex items-center space-x-4 mb-4">
+						<div className="flex flex-col md:flex-row items-center space-x-4 mb-4">
 							<h3
 								className={`font-bold ${
 									isDarkMode ? "text-white fade-in" : "text-black fade-out"
@@ -322,19 +322,22 @@ export default function Dashboard() {
 							>
 								Revenue
 							</h3>
-							<span className="h-6 border-l border-zinc-300"></span>
+							<span className="h-6 border-l border-zinc-300 hidden md:block"></span>
 
 							{revenueData.map((data, index) => (
-								<div key={index} className="flex items-center space-x-2">
+								<div
+									key={index}
+									className="flex flex-col md:flex-row items-center space-x-2"
+								>
 									<span
-										className={`w-2 h-2 rounded-full ${
+										className={`w-2 h-2 rounded-full hidden md:block ${
 											isDarkMode ? "bg-white fade-in" : "bg-black fade-out"
 										}`}
 									></span>
 									<span
 										className={`${
 											isDarkMode
-												? "text-zinc-200 fade-in"
+												? "text-zinc-100 fade-in"
 												: "text-zinc-700 fade-out"
 										}`}
 									>
@@ -378,8 +381,8 @@ export default function Dashboard() {
 					<div
 						className={`w-[30%] h-full rounded-3xl py-6 px-4 ${
 							isDarkMode
-								? "bg-zinc-800 text-white fade-in"
-								: "bg-zinc-100 text-zinc-900 fade-out"
+								? "bg-zinc-800 hover:bg-zinc-700 text-white fade-in"
+								: "bg-zinc-100 hover:bg-zinc-200 text-zinc-900 fade-out"
 						}`}
 					>
 						<h6 className="text-md font-semibold text-center">
@@ -443,8 +446,8 @@ export default function Dashboard() {
 					<div
 						className={`w-full md:w-[70%] rounded-3xl overflow-y-scroll py-6 px-4 ${
 							isDarkMode
-								? "bg-zinc-800 text-white fade-in"
-								: "bg-zinc-100 text-black fade-out"
+								? "bg-zinc-800 hover:bg-zinc-700 text-white fade-in"
+								: "bg-zinc-100 hover:bg-zinc-200 text-black fade-out"
 						}`}
 					>
 						<div className="font-bold mb-1 ml-3">Top Selling Products</div>
@@ -475,8 +478,8 @@ export default function Dashboard() {
 					<div
 						className={`w-[30%] h-full rounded-3xl py-6 px-4 ${
 							isDarkMode
-								? "bg-zinc-800 text-white fade-in"
-								: "bg-zinc-100 text-black fade-out"
+								? "bg-zinc-800 hover:bg-zinc-700 text-white fade-in"
+								: "bg-zinc-100 hover:bg-zinc-200 text-black fade-out"
 						}`}
 					>
 						<div className="font-bold">Total Sales</div>

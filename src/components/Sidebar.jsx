@@ -175,8 +175,8 @@ export default function Sidebar() {
 			<div
 				className={`w-52 ${isLeftClose ? "hidden" : "block"} transition-bg ${
 					isDarkMode
-						? "bg-zinc-900 text-zinc-300 fade-in"
-						: "bg-white text-zinc-900 fade-out"
+						? "bg-zinc-900 text-zinc-300 hover:text-zinc-400 fade-in"
+						: "bg-white text-zinc-900 hover:text-zinc-800 fade-out"
 				} h-screen p-4 font-sans overflow-scroll transition-transform duration-300 md:translate-x-0 fixed md:static top-0 left-0 z-50 shadow-lg`}
 			>
 				<div className="flex items-center mb-8">
@@ -195,9 +195,9 @@ export default function Sidebar() {
 									className={`mr-4 ${
 										activeTab1 === "Favorites"
 											? isDarkMode
-												? "text-zinc-100 fade-in"
-												: "fade-out text-zinc-400"
-											: "text-zinc-300"
+												? "text-zinc-100 hover:text-zinc-200 fade-in"
+												: "fade-out text-zinc-400 hover:text-zinc-300"
+											: "text-zinc-300 hover:text-zinc-500 fade-in"
 									}`}
 									onClick={() => setActiveTab1("Favorites")}
 								>
@@ -207,9 +207,9 @@ export default function Sidebar() {
 									className={`${
 										activeTab1 === "Recent"
 											? isDarkMode
-												? "text-zinc-100 fade-in"
-												: "fade-out text-zinc-400"
-											: "text-zinc-300 fade-in"
+												? "text-zinc-100 hover:text-zinc-200 fade-in"
+												: "fade-out text-zinc-400 hover:text-zinc-300"
+											: "text-zinc-300 hover:text-zinc-500 fade-in"
 									}`}
 									onClick={() => setActiveTab1("Recent")}
 								>
