@@ -182,7 +182,7 @@ export default function Sidebar() {
 				} h-screen p-4 font-sans overflow-scroll transition-transform duration-300 md:translate-x-0 fixed md:static top-0 left-0 z-50 shadow-lg`}
 			>
 				<div className="flex justify-between items-center mb-8">
-					<div className="flex items-center mb-8">
+					<div className="flex items-center">
 						<FaUserCircle
 							size={30}
 							className={`mr-2 text-${isDarkMode ? "zinc-300" : "zinc-800"}`}
@@ -191,7 +191,7 @@ export default function Sidebar() {
 					</div>
 					<div className="flex items-start">
 						<LuPanelLeftClose
-							className="cursor-pointer md:hidden hover:text-yellow-300 duration-300"
+							className="cursor-pointer md:hidden hover:text-gray-400 duration-300"
 							onClick={() => setIsLeftClose(true)}
 						/>
 					</div>
