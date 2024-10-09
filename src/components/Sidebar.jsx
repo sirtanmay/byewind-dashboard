@@ -5,6 +5,7 @@ import {
 	FaUserCircle,
 	FaRegIdBadge,
 } from "react-icons/fa";
+import { LuPanelLeftClose } from "react-icons/lu";
 import { HiOutlineIdentification } from "react-icons/hi";
 import {
 	PiChartPieSliceLight,
@@ -161,16 +162,17 @@ export default function Sidebar() {
 		},
 	};
 
+	const { setIsLeftClose } = useAuth();
+
 	return (
 		<motion.div
 			variants={sidebarVariants}
 			initial="closed"
 			animate={isLeftClose ? "closed" : "open"}
 			className={`h-screen font-sans ${
-				isDarkMode
-					? "bg-zinc-900 text-zinc-300 fade-in"
-					: "bg-white text-zinc-700 fade-out"
-			}`}
+				isDarkMode ? "bg-zinc-900 text-zinc-300" : "bg-white text-zinc-700"
+			} 
+                md:w-52 top-0 left-0 z-50 shadow-lg transition-all duration-300`}
 		>
 			<div
 				className={`w-52 ${isLeftClose ? "hidden" : "block"} transition-bg ${
@@ -179,12 +181,20 @@ export default function Sidebar() {
 						: "bg-white text-zinc-900 hover:text-zinc-800 fade-out"
 				} h-screen p-4 font-sans overflow-scroll transition-transform duration-300 md:translate-x-0 fixed md:static top-0 left-0 z-50 shadow-lg`}
 			>
-				<div className="flex items-center mb-8">
-					<FaUserCircle
-						size={30}
-						className={`mr-2 text-${isDarkMode ? "zinc-300" : "zinc-800"}`}
-					/>
-					<p className={`font-medium text-lg`}>ByeWind</p>
+				<div className="flex justify-between items-center mb-8">
+					<div className="flex items-center mb-8">
+						<FaUserCircle
+							size={30}
+							className={`mr-2 text-${isDarkMode ? "zinc-300" : "zinc-800"}`}
+						/>
+						<p className={`font-medium text-lg`}>ByeWind</p>
+					</div>
+					<div className="flex items-start">
+						<LuPanelLeftClose
+							className="cursor-pointer md:hidden hover:text-yellow-300 duration-300"
+							onClick={() => setIsLeftClose(true)}
+						/>
+					</div>
 				</div>
 
 				<div className="mb-4">

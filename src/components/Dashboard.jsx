@@ -209,7 +209,7 @@ export default function Dashboard() {
 					}`}
 				>
 					<div className="flex flex-col md:flex-row gap-x-4">
-						<div className="flex flex-wrap gap-x-4 gap-y-4 h-full w-full md:w-1/2">
+						<div className="flex flex-wrap gap-x-4 gap-y-4 h-full w-full md:w-1/2 mb-4">
 							{boxes.map((data, index) => {
 								const isDark = isDarkMode
 									? "bg-zinc-800 text-white fade-in"
@@ -230,7 +230,7 @@ export default function Dashboard() {
 									<Link
 										to={data.link}
 										key={index}
-										className={`${alternateColor} pt-8 px-6 h-[48%] rounded-3xl w-full md:w-[47%] duration-1000 group`}
+										className={`${alternateColor} p-6 px-6 h-[48%] rounded-3xl w-full md:w-[47%] duration-1000 group`}
 									>
 										<div className="text-md font-bold">{data.name}</div>
 										<div className="mt-4 flex justify-between items-center">
@@ -263,11 +263,11 @@ export default function Dashboard() {
 							}`}
 						>
 							<div className="py-6 px-2 rounded-md w-full cursor-pointer">
-								<h3 className="ml-4 text-start font-bold">
+								<h3 className="ml-4 text-start font-bold text-sm md:text-lg">
 									Projections vs Actuals
 								</h3>
 								<div className="mt-4 cursor-pointer" style={{ height: 300 }}>
-									<ResponsiveContainer width="100%" height="90%">
+									<ResponsiveContainer width="100%" height="100%">
 										<BarChart
 											width={500}
 											height={300}
@@ -298,23 +298,22 @@ export default function Dashboard() {
 						</div>
 					</div>
 				</motion.div>
-
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 					transition={{ duration: 0.7 }}
-					className="flex flex-col md:flex-row gap-6 h-[380px] w-full mt-6"
+					className="flex flex-col md:flex-row gap-6 h-auto w-full mt-6"
 				>
 					<div
-						className={`w-[70%] rounded-3xl pt-8 pb-12 px-8 ${
+						className={`w-full md:w-[70%] rounded-3xl pt-8 pb-12 px-8 ${
 							isDarkMode
 								? "bg-zinc-800 hover:bg-zinc-700 text-white fade-in"
 								: "bg-zinc-100 hover:bg-zinc-200 text-zinc-900 fade-out"
 						}`}
-						style={{ height: "380px" }}
+						style={{ height: "auto" }}
 					>
-						<div className="flex flex-col md:flex-row items-center space-x-4 mb-4">
+						<div className="flex flex-col md:flex-row items-center md:space-x-4 mb-4">
 							<h3
 								className={`font-bold ${
 									isDarkMode ? "text-white fade-in" : "text-black fade-out"
@@ -322,12 +321,13 @@ export default function Dashboard() {
 							>
 								Revenue
 							</h3>
+
 							<span className="h-6 border-l border-zinc-300 hidden md:block"></span>
 
 							{revenueData.map((data, index) => (
 								<div
 									key={index}
-									className="flex flex-col md:flex-row items-center space-x-2"
+									className="flex flex-col md:flex-row items-center space-x-2 mt-2 md:mt-0"
 								>
 									<span
 										className={`w-2 h-2 rounded-full hidden md:block ${
@@ -354,42 +354,42 @@ export default function Dashboard() {
 							))}
 						</div>
 
-						<ResponsiveContainer
-							width="100%"
-							height="100%"
-							className={`${
-								isDarkMode ? "text-white fade-in" : "text-black fade-out"
-							}`}
-						>
-							<LineChart data={data}>
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis dataKey="name" padding={{ left: 30, right: 30 }} />
-								<YAxis />
-								<Tooltip />
-								<Legend />
-								<Line
-									type="monotone"
-									dataKey="Projection"
-									stroke="#8884d8"
-									activeDot={{ r: 8 }}
-								/>
-								<Line type="monotone" dataKey="Actual" stroke="#82ca9d" />
-							</LineChart>
-						</ResponsiveContainer>
+						<div className="mt-4" style={{ height: "240px" }}>
+							<ResponsiveContainer width="100%" height="100%">
+								<LineChart data={data}>
+									<CartesianGrid strokeDasharray="3 3" />
+									<XAxis dataKey="name" padding={{ left: 30, right: 30 }} />
+									<YAxis />
+									<Tooltip />
+									<Legend />
+									<Line
+										type="monotone"
+										dataKey="Projection"
+										stroke={isDarkMode ? "#4fc3f7" : "#8884d8"}
+										activeDot={{ r: 8 }}
+									/>
+									<Line
+										type="monotone"
+										dataKey="Actual"
+										stroke={isDarkMode ? "#ff7043" : "#82ca9d"}
+									/>
+								</LineChart>
+							</ResponsiveContainer>
+						</div>
 					</div>
 
 					<div
-						className={`w-[30%] h-full rounded-3xl py-6 px-4 ${
+						className={`w-full md:w-[30%] h-full rounded-3xl py-6 px-4 ${
 							isDarkMode
 								? "bg-zinc-800 hover:bg-zinc-700 text-white fade-in"
 								: "bg-zinc-100 hover:bg-zinc-200 text-zinc-900 fade-out"
 						}`}
 					>
-						<h6 className="text-md font-semibold text-center">
+						<h6 className="text-md font-semibold text-center mb-4">
 							Revenue by Location
 						</h6>
 
-						<div className="relative w-full h-1/2 rounded-3xl overflow-hidden">
+						<div className="relative w-full h-56 md:h-1/2 rounded-3xl overflow-hidden mb-4">
 							{isDarkMode ? (
 								<img
 									src={darkMap}
@@ -407,19 +407,19 @@ export default function Dashboard() {
 
 						<div
 							className={` ${
-								isDarkMode ? " text-white" : " text-black"
+								isDarkMode ? "text-white" : "text-black"
 							} rounded-lg`}
 						>
 							{revenueDataCountry.map((data, index) => (
-								<div key={index} className="mb-1">
-									<div className="flex justify-between">
+								<div key={index} className="mb-2">
+									<div className="flex justify-between text-sm">
 										<span>{data.location}</span>
 										<span>{data.revenue}K</span>
 									</div>
 									<div
 										className={`w-full h-2 ${
 											isDarkMode ? "bg-zinc-700" : "bg-gray-200"
-										} rounded-full mx-auto`}
+										} rounded-full`}
 									>
 										<div
 											className={`h-2 ${
@@ -441,7 +441,7 @@ export default function Dashboard() {
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 					transition={{ duration: 0.7 }}
-					className="flex flex-col md:flex-row gap-6 h-[380px] w-full mt-6"
+					className="flex flex-col md:flex-row gap-6 h-auto w-full mt-6"
 				>
 					<div
 						className={`w-full md:w-[70%] rounded-3xl overflow-y-scroll py-6 px-4 ${
@@ -449,40 +449,44 @@ export default function Dashboard() {
 								? "bg-zinc-800 hover:bg-zinc-700 text-white fade-in"
 								: "bg-zinc-100 hover:bg-zinc-200 text-black fade-out"
 						}`}
+						style={{ maxHeight: "400px" }}
 					>
-						<div className="font-bold mb-1 ml-3">Top Selling Products</div>
-						<table className="min-w-full table-auto text-left border-collapse">
-							<thead>
-								<tr className="text-sm border-b-2 border-[#a9aaac]">
-									{tableHeaders.map((header, index) => (
-										<th key={index} className="px-4 py-2">
-											{header.name}
-										</th>
-									))}
-								</tr>
-							</thead>
-							<tbody>
-								{tableData.map((item, index) => (
-									<tr key={index}>
+						<div className="font-bold mb-3 ml-3">Top Selling Products</div>
+						<div className="overflow-x-auto">
+							<table className="min-w-full table-auto text-left border-collapse">
+								<thead>
+									<tr className="text-sm border-b-2 border-[#a9aaac]">
 										{tableHeaders.map((header, index) => (
-											<td key={index} className="px-4 py-2">
-												{item[header.key]}
-											</td>
+											<th key={index} className="px-4 py-2">
+												{header.name}
+											</th>
 										))}
 									</tr>
-								))}
-							</tbody>
-						</table>
+								</thead>
+								<tbody>
+									{tableData.map((item, index) => (
+										<tr key={index} className="hover:bg-zinc-700">
+											{" "}
+											{tableHeaders.map((header, index) => (
+												<td key={index} className="px-4 py-2">
+													{item[header.key]}
+												</td>
+											))}
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
 					</div>
 
 					<div
-						className={`w-[30%] h-full rounded-3xl py-6 px-4 ${
+						className={`w-full md:w-[30%] h-auto rounded-3xl py-6 px-4 ${
 							isDarkMode
 								? "bg-zinc-800 hover:bg-zinc-700 text-white fade-in"
 								: "bg-zinc-100 hover:bg-zinc-200 text-black fade-out"
 						}`}
 					>
-						<div className="font-bold">Total Sales</div>
+						<div className="font-bold mb-3">Total Sales</div>
 						<ResponsiveContainer width="100%" height={190}>
 							<PieChart>
 								<Pie
@@ -507,28 +511,26 @@ export default function Dashboard() {
 						</ResponsiveContainer>
 
 						<div>
-							{PieChartdata.map((data, index) => {
-								return (
-									<div
-										className="flex py-1 justify-between text-center"
-										key={index}
-									>
-										<div className="flex items-center gap-2">
-											<span
-												style={{
-													backgroundColor: COLORS[index],
-													width: "12px",
-													height: "12px",
-													borderRadius: "50%",
-													display: "inline-block",
-												}}
-											></span>
-											<span>{data.name}</span>
-										</div>
-										<span>${data.value}</span>
+							{PieChartdata.map((data, index) => (
+								<div
+									className="flex py-1 justify-between text-center"
+									key={index}
+								>
+									<div className="flex items-center gap-2">
+										<span
+											style={{
+												backgroundColor: COLORS[index],
+												width: "12px",
+												height: "12px",
+												borderRadius: "50%",
+												display: "inline-block",
+											}}
+										></span>
+										<span>{data.name}</span>
 									</div>
-								);
-							})}
+									<span>${data.value}</span>
+								</div>
+							))}
 						</div>
 					</div>
 				</motion.div>

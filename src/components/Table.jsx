@@ -54,44 +54,36 @@ const Table = () => {
 			status: "Rejected",
 		},
 		{
-			orderId: "#CM9805",
-			user: "Andi Lane",
-			project: "App Landing Page",
-			address: "Nest Lane Olivette",
-			date: "Feb 2, 2023",
-			status: "Rejected",
-		},
-		{
-			orderId: "#CM9804",
-			user: "Orlando Diggs",
-			project: "Admin Dashboard",
+			orderId: "#CM9806",
+			user: "Morgan Lane",
+			project: "Web Application",
 			address: "Washburn Baton Rouge",
-			date: "Yesterday",
-			status: "Rejected",
+			date: "Feb 1, 2023",
+			status: "Approved",
 		},
 		{
-			orderId: "#CM9803",
-			user: "Drew Cano",
-			project: "Client Project",
-			address: "Bagwell Avenue Ocala",
-			date: "1 hour ago",
-			status: "Pending",
+			orderId: "#CM9807",
+			user: "Parker Lane",
+			project: "Web Application",
+			address: "Washburn Baton Rouge",
+			date: "Jan 31, 2023",
+			status: "Approved",
 		},
 		{
-			orderId: "#CM9802",
-			user: "Kate Morrison",
-			project: "CRM Admin pages",
-			address: "Larry San Francisco",
-			date: "A minute ago",
-			status: "Complete",
+			orderId: "#CM9808",
+			user: "Parker Lane",
+			project: "Web Application",
+			address: "Washburn Baton Rouge",
+			date: "Jan 31, 2023",
+			status: "Approved",
 		},
 		{
-			orderId: "#CM9801",
-			user: "Natali Craig",
-			project: "Landing Page",
-			address: "Meadow Lane Oakland",
-			date: "Just now",
-			status: "In Progress",
+			orderId: "#CM9809",
+			user: "Parker Lane",
+			project: "Web Application",
+			address: "Washburn Baton Rouge",
+			date: "Jan 31, 2023",
+			status: "Approved",
 		},
 	];
 
@@ -132,16 +124,16 @@ const Table = () => {
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 			transition={{ duration: 0.5 }}
-			className={`p-6 w-full h-screen ${
+			className={`p-4 sm:p-6 w-full min-h-screen ${
 				isDarkMode
 					? "bg-zinc-900 text-white fade-in"
 					: "bg-white text-zinc-900 fade-out"
 			}`}
 		>
-			<h2 className="text-xl font-bold mb-4">Order List</h2>
+			<h2 className="text-lg sm:text-xl font-bold mb-4">Order List</h2>
 
 			<div
-				className={`flex items-center justify-between mb-4 rounded-md p-2 ${
+				className={`flex flex-wrap items-center justify-between mb-4 rounded-md p-2 ${
 					isDarkMode
 						? "bg-zinc-900 text-white fade-in"
 						: " bg-[#f8f9fb] text-zinc-900 fade-out"
@@ -161,16 +153,16 @@ const Table = () => {
 						</div>
 					))}
 				</div>
-				<div className="relative">
+				<div className="relative mt-2 sm:mt-0">
 					<FaSearch
-						className={`absolute top-3.5 left-2 hover:text-gray-600 ${
+						className={`absolute top-3 left-2 hover:text-gray-900 ${
 							isDarkMode ? "text-zinc-300 fade-in" : "text-zinc-400 fade-out"
 						}`}
 					/>
 					<input
 						type="text"
 						placeholder="Search"
-						className={`pl-8 py-2 border rounded-lg w-15 
+						className={`pl-8 py-2 border rounded-lg w-full sm:w-40 lg:w-52
                             ${
 															isDarkMode
 																? "bg-zinc-800 hover:bg-zinc-700 text-white border-zinc-600 fade-in"
@@ -198,7 +190,7 @@ const Table = () => {
 						{currentPageData.map((item, index) => (
 							<tr
 								key={index}
-								className={`border-b rounded-md ${
+								className={`border-b ${
 									isDarkMode
 										? "hover:bg-zinc-800 text-white border-zinc-600"
 										: "hover:bg-[#f8f9fb] text-black border-zinc-300"
@@ -237,17 +229,17 @@ const Table = () => {
 				</table>
 			</div>
 
-			<div className="flex justify-end mt-4">
+			<div className="flex justify-center sm:justify-end mt-4">
 				<ReactPaginate
 					previousLabel={"<"}
 					nextLabel={">"}
 					breakLabel={"..."}
 					pageCount={pageCount}
-					marginPagesDisplayed={2}
-					pageRangeDisplayed={5}
+					marginPagesDisplayed={1}
+					pageRangeDisplayed={2}
 					onPageChange={handlePageClick}
 					containerClassName={"pagination flex items-center gap-2"}
-					pageClassName={`p-2 font-bold mx-2 rounded cursor-pointer ${
+					pageClassName={`p-2 font-bold mx-1 sm:mx-2 rounded cursor-pointer ${
 						isDarkMode
 							? "hover:bg-zinc-800 text-zinc-100 duration-100"
 							: "hover:bg-zinc-200 text-zinc-900 duration-100"
