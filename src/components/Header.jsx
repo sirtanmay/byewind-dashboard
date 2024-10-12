@@ -98,7 +98,9 @@ export default function Header() {
 							</Link>
 						</span>
 						<span>/</span>
-						<span className="hover:text-gray-400 duration-300">Default</span>
+						<span className="hover:text-gray-400 duration-300 cursor-pointer">
+							Default
+						</span>
 					</div>
 				</div>
 
