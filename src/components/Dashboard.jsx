@@ -190,7 +190,7 @@ export default function Dashboard() {
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0 }}
 				transition={{ duration: 0.5 }}
-				className={`p-4 ${
+				className={`p-4 font-inter ${
 					isDarkMode
 						? "bg-zinc-900 text-white fade-in"
 						: "bg-white text-zinc-900 fade-out"

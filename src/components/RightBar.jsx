@@ -161,7 +161,7 @@ export default function Sidebar() {
 			variants={sidebarVariants}
 			initial="closed"
 			animate={isRightClose ? "closed" : "open"}
-			className={`max-h-screen font-sans overflow-scroll ${
+			className={`max-h-screen font-inter overflow-scroll ${
 				isDarkMode ? "bg-zinc-900 text-zinc-300" : "bg-white text-zinc-700"
 			}`}
 		>

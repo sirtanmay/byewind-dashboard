@@ -169,7 +169,7 @@ export default function Sidebar() {
 			variants={sidebarVariants}
 			initial="closed"
 			animate={isLeftClose ? "closed" : "open"}
-			className={`h-screen font-sans ${
+			className={`h-screen font-inter ${
 				isDarkMode ? "bg-zinc-900 text-zinc-300" : "bg-white text-zinc-700"
 			} 
                 md:w-52 top-0 left-0 z-50 shadow-lg transition-all duration-300`}
@@ -179,7 +179,7 @@ export default function Sidebar() {
 					isDarkMode
 						? "bg-zinc-900 text-zinc-300 hover:text-zinc-400 fade-in"
 						: "bg-white text-zinc-900 hover:text-zinc-800 fade-out"
-				} h-screen p-4 font-sans overflow-scroll transition-transform duration-300 md:translate-x-0 fixed md:static top-0 left-0 z-50 shadow-lg`}
+				} h-screen p-4 font-inter overflow-scroll transition-transform duration-300 md:translate-x-0 fixed md:static top-0 left-0 z-50 shadow-lg`}
 			>
 				<div className="flex justify-between items-center mb-8">
 					<div className="flex items-center">

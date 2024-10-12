@@ -124,7 +124,7 @@ const Table = () => {
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 			transition={{ duration: 0.5 }}
-			className={`p-4 sm:p-6 w-full min-h-screen ${
+			className={`p-4 font-inter sm:p-6 w-full min-h-screen ${
 				isDarkMode
 					? "bg-zinc-900 text-white fade-in"
 					: "bg-white text-zinc-900 fade-out"
