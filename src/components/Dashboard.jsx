@@ -211,10 +211,6 @@ export default function Dashboard() {
 					<div className="flex flex-col md:flex-row gap-x-4">
 						<div className="flex flex-wrap gap-x-4 gap-y-4 h-full w-full md:w-1/2 mb-4">
 							{boxes.map((data, index) => {
-								const isDark = isDarkMode
-									? "bg-zinc-800 text-white fade-in"
-									: "bg-white text-zinc-900 fade-out";
-
 								let alternateColor;
 								if (index === 1 || index === 2) {
 									alternateColor = isDarkMode
@@ -435,7 +431,6 @@ export default function Dashboard() {
 						</div>
 					</div>
 				</motion.div>
-
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
@@ -465,7 +460,7 @@ export default function Dashboard() {
 								</thead>
 								<tbody>
 									{tableData.map((item, index) => (
-										<tr key={index} className="hover:bg-zinc-700">
+										<tr key={index}>
 											{" "}
 											{tableHeaders.map((header, index) => (
 												<td key={index} className="px-4 py-2">

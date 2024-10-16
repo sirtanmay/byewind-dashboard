@@ -1,18 +1,24 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { PiBugBeetle, PiUser, PiBroadcast } from "react-icons/pi";
 import { useAuth } from "./Context";
+import PropTypes from "prop-types";
 
 const IconWrapper = ({ children, bgColor }) => (
 	<div className={`p-1 rounded-full mr-2 ${bgColor}`}>{children}</div>
 );
 
-const NotificationItem = ({ notif, isDarkMode }) => {
+IconWrapper.propTypes = {
+	children: PropTypes.node.isRequired,
+	bgColor: PropTypes.string.isRequired,
+};
+
+const NotificationItem = React.memo(({ notif, isDarkMode }) => {
 	const icons = {
 		bug: (
 			<PiBugBeetle
-				className={`${
-					isDarkMode ? "text-red-400" : "text-red-600"
-				}} style={{ fontSize: '18px' }`}
+				className={`${isDarkMode ? "text-red-400" : "text-red-600"}`}
+				style={{ fontSize: "18px" }}
 			/>
 		),
 		user: (
@@ -52,6 +58,17 @@ const NotificationItem = ({ notif, isDarkMode }) => {
 			</div>
 		</li>
 	);
+});
+
+NotificationItem.displayName = "NotificationItem";
+
+NotificationItem.propTypes = {
+	notif: PropTypes.shape({
+		type: PropTypes.oneOf(["bug", "user", "subscribe"]).isRequired,
+		message: PropTypes.string.isRequired,
+		time: PropTypes.string.isRequired,
+	}).isRequired,
+	isDarkMode: PropTypes.bool.isRequired,
 };
 
 const ActivityItem = ({ activity, isDarkMode }) => (
@@ -74,6 +91,15 @@ const ActivityItem = ({ activity, isDarkMode }) => (
 	</li>
 );
 
+ActivityItem.propTypes = {
+	activity: PropTypes.shape({
+		avatar: PropTypes.string.isRequired,
+		action: PropTypes.string.isRequired,
+		time: PropTypes.string.isRequired,
+	}).isRequired,
+	isDarkMode: PropTypes.bool.isRequired,
+};
+
 const ContactItem = ({ contact, index, isDarkMode }) => (
 	<li className="flex items-center mb-3">
 		<IconWrapper bgColor={isDarkMode ? "bg-purple-600/20" : "bg-purple-200/50"}>
@@ -89,6 +115,87 @@ const ContactItem = ({ contact, index, isDarkMode }) => (
 	</li>
 );
 
+ContactItem.propTypes = {
+	contact: PropTypes.shape({
+		user: PropTypes.string.isRequired,
+	}).isRequired,
+	index: PropTypes.number.isRequired,
+	isDarkMode: PropTypes.bool.isRequired,
+};
+
+const Section = ({ title, children, isDarkMode }) => (
+	<div>
+		<h2
+			className={`font-bold text-md mb-2 ${
+				isDarkMode ? "text-zinc-100" : "text-zinc-900"
+			}`}
+		>
+			{title}
+		</h2>
+		<ul className="max-h-[270px] overflow-hidden overflow-y-auto mb-6">
+			{children}
+		</ul>
+	</div>
+);
+
+Section.propTypes = {
+	title: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired,
+	isDarkMode: PropTypes.bool.isRequired,
+};
+
+const notifications = [
+	{ type: "bug", message: "You have a bug that needs ...", time: "Just now" },
+	{ type: "user", message: "New user registered", time: "59 minutes ago" },
+	{
+		type: "bug",
+		message: "You have a bug that needs ...",
+		time: "12 hours ago",
+	},
+	{
+		type: "subscribe",
+		message: "Andi Lane subscribed to you",
+		time: "Today, 11:59 AM",
+	},
+];
+
+const contactsData = [
+	{ user: "Natali Craig" },
+	{ user: "Drew Cano" },
+	{ user: "Orlando Diggs" },
+	{ user: "Andi Lane" },
+	{ user: "Kate Morrison" },
+	{ user: "Koray Occumos" },
+];
+
+const activityData = [
+	{
+		avatar: "https://i.pravatar.cc/30?img=20",
+		action: "You have a bug that needs...",
+		time: "Just now",
+	},
+	{
+		avatar: "https://i.pravatar.cc/30?img=21",
+		action: "Released a new version",
+		time: "59 minutes ago",
+	},
+	{
+		avatar: "https://i.pravatar.cc/30?img=22",
+		action: "Submitted a bug",
+		time: "12 hours ago",
+	},
+	{
+		avatar: "https://i.pravatar.cc/30?img=23",
+		action: "Modified A data in Page X",
+		time: "Today, 11:59 AM",
+	},
+	{
+		avatar: "https://i.pravatar.cc/30?img=24",
+		action: "Deleted a page in Project X",
+		time: "Feb 2, 2023",
+	},
+];
+
 export default function Sidebar() {
 	const { isRightClose, isDarkMode } = useAuth();
 	const sidebarVariants = {
@@ -103,58 +210,6 @@ export default function Sidebar() {
 			transition: { duration: 0.3, ease: "easeOut" },
 		},
 	};
-
-	const notifications = [
-		{ type: "bug", message: "You have a bug that needs ...", time: "Just now" },
-		{ type: "user", message: "New user registered", time: "59 minutes ago" },
-		{
-			type: "bug",
-			message: "You have a bug that needs ...",
-			time: "12 hours ago",
-		},
-		{
-			type: "subscribe",
-			message: "Andi Lane subscribed to you",
-			time: "Today, 11:59 AM",
-		},
-	];
-
-	const contactsData = [
-		{ user: "Natali Craig" },
-		{ user: "Drew Cano" },
-		{ user: "Orlando Diggs" },
-		{ user: "Andi Lane" },
-		{ user: "Kate Morrison" },
-		{ user: "Koray Occumos" },
-	];
-
-	const activityData = [
-		{
-			avatar: "https://i.pravatar.cc/30?img=20",
-			action: "You have a bug that needs...",
-			time: "Just now",
-		},
-		{
-			avatar: "https://i.pravatar.cc/30?img=21",
-			action: "Released a new version",
-			time: "59 minutes ago",
-		},
-		{
-			avatar: "https://i.pravatar.cc/30?img=22",
-			action: "Submitted a bug",
-			time: "12 hours ago",
-		},
-		{
-			avatar: "https://i.pravatar.cc/30?img=23",
-			action: "Modified A data in Page X",
-			time: "Today, 11:59 AM",
-		},
-		{
-			avatar: "https://i.pravatar.cc/30?img=24",
-			action: "Deleted a page in Project X",
-			time: "Feb 2, 2023",
-		},
-	];
 
 	return (
 		<motion.div
@@ -198,18 +253,3 @@ export default function Sidebar() {
 		</motion.div>
 	);
 }
-
-const Section = ({ title, children, isDarkMode }) => (
-	<div>
-		<h2
-			className={`font-bold text-md mb-2 ${
-				isDarkMode ? "text-zinc-100" : "text-zinc-900"
-			}`}
-		>
-			{title}
-		</h2>
-		<ul className="max-h-[270px] overflow-hidden overflow-y-auto mb-6">
-			{children}
-		</ul>
-	</div>
-);

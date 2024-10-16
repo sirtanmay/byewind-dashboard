@@ -158,7 +158,7 @@ export default function Header() {
 
 					<FaClockRotateLeft
 						onClick={handleClockClick}
-						className={`hidden md:block cursor-pointer transition-transform hover:text-gray-400 duration-300 ${
+						className={`hidden md:block cursor-pointer hover:text-gray-400 duration-300 ${
 							rotate ? "rotate-animation" : ""
 						}`}
 						style={{
@@ -167,7 +167,7 @@ export default function Header() {
 					/>
 					<FaRegBell
 						onClick={handleBellClick}
-						className={`hidden md:block cursor-pointer hover:text-gray-400 duration-300 transition-transform ${
+						className={`hidden md:block cursor-pointer hover:text-gray-400 duration-300 ${
 							animate ? "animate-bell" : ""
 						}`}
 						style={{
